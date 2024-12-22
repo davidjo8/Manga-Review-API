@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: manga
+    password: manga
+    url: jdbc:mysql://localhost:3306/manga
+    
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
