@@ -18,9 +18,9 @@ public class MangaData {
 	private String mangaCountry;
 	private String mangaPublishYear;
 	private String mangaLanguage;
+	private Mangaka mangaMangaka;
 	private Set<MangaGenre> genres = new HashSet<>();
 	private Set<MangaMangaReview> mangaReviews = new HashSet<>();
-	private Set<MangaMangaka> mangakas = new HashSet<>();
 	
 	public MangaData (Manga manga) {
 		mangaId = manga.getMangaId();
@@ -28,6 +28,7 @@ public class MangaData {
 		mangaCountry = manga.getMangaCountry();
 		mangaPublishYear = manga.getMangaPublishYear();
 		mangaLanguage = manga.getMangaLanguage();
+		mangaMangaka = manga.getMangaka();
 		
 		for (Genre genre : manga.getGenres()) {
 			genres.add(new MangaGenre(genre));
@@ -35,10 +36,6 @@ public class MangaData {
 		
 		for (MangaReview mangaReview : manga.getMangaReviews()) {
 			mangaReviews.add(new MangaMangaReview(mangaReview));
-		}
-		
-		for (Mangaka mangaka : manga.getMangakas()) {
-			mangakas.add(new MangaMangaka(mangaka));
 		}
 		
 	}
@@ -68,22 +65,5 @@ public class MangaData {
 			reviewContent = mangaReview.getReviewContent();
 		}
 	}
-	@Data
-	@NoArgsConstructor
-	public static class MangaMangaka {
-		private Long mangakaId;
-		private String mangakaFirstName;
-		private String mangakaLastName;
-		private String mangakaDob;
-		private String mangakaCountry;
-		
-		public MangaMangaka(Mangaka mangaka) {
-			mangakaId = mangaka.getMangakaId();
-			mangakaFirstName = mangaka.getMangakaFirstName();
-			mangakaLastName = mangaka.getMangakaLastName();
-			mangakaDob = mangaka.getMangakaDob();
-			mangakaCountry = mangaka.getMangakaCountry();
-		}
+
 	}
-	
-}

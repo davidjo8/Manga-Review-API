@@ -32,7 +32,7 @@ public class Manga {
 	@JoinColumn(name = "mangaka_id", nullable = false) // Foreign key
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	private Set<Mangaka> mangakas = new HashSet<>();
+	private Mangaka mangaka;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "manga_genre", joinColumns = @JoinColumn(name = "manga_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))

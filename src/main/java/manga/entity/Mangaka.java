@@ -24,8 +24,8 @@ public class Mangaka {
 	private String mangakaDob;
 	private String mangakaCountry;
 	
-	@OneToMany(mappedBy = "mangaka", cascade = CascadeType.ALL, orphanRemoval = false)
+	@OneToMany(mappedBy = "mangaka", cascade = CascadeType.PERSIST, orphanRemoval = false)
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	private Set<Manga> manga = new HashSet<>();
+	private Set<Manga> mangas = new HashSet<>();
 }
