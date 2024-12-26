@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import manga.entity.Genre;
 import manga.entity.Manga;
 import manga.entity.MangaReview;
-import manga.entity.Mangaka;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +17,9 @@ public class MangaData {
 	private String mangaCountry;
 	private String mangaPublishYear;
 	private String mangaLanguage;
-	private Mangaka mangaMangaka;
-	private Set<MangaGenre> genres = new HashSet<>();
-	private Set<MangaMangaReview> mangaReviews = new HashSet<>();
+	private Long mangakaId;
+	private Set<GenreData> genres = new HashSet<>();
+	private Set<MangaReviewData> mangaReviews = new HashSet<>();
 	
 	public MangaData (Manga manga) {
 		mangaId = manga.getMangaId();
@@ -28,42 +27,51 @@ public class MangaData {
 		mangaCountry = manga.getMangaCountry();
 		mangaPublishYear = manga.getMangaPublishYear();
 		mangaLanguage = manga.getMangaLanguage();
-		mangaMangaka = manga.getMangaka();
+		if (manga.getMangaka() != null) {
+			mangakaId = manga.getMangaka().getMangakaId();
+		} else {
+			mangakaId = null;
+		}
 		
 		for (Genre genre : manga.getGenres()) {
-			genres.add(new MangaGenre(genre));
+			genres.add(new GenreData(genre));
 		}
 		
 		for (MangaReview mangaReview : manga.getMangaReviews()) {
-			mangaReviews.add(new MangaMangaReview(mangaReview));
+			mangaReviews.add(new MangaReviewData(mangaReview));
 		}
 		
 	}
 	@Data
 	@NoArgsConstructor
-	public static class MangaGenre {
+	public static class GenreData {
 		private Long genreId;
 		private String genreType;
 		
-		public MangaGenre(Genre genre) {
+		public GenreData(Genre genre) {
 			genreId = genre.getGenreId();
 			genreType = genre.getGenreType();
 		}
 	}
 	@Data
 	@NoArgsConstructor
-	public static class MangaMangaReview {
+	public static class MangaReviewData {
 		private Long mangaReviewId;
 		private String reviewAuthor;
 		private String reviewRating;
 		private String reviewContent;
+		private Long mangaId;
 		
-		public MangaMangaReview(MangaReview mangaReview) {
+		public MangaReviewData(MangaReview mangaReview) {
 			mangaReviewId = mangaReview.getMangaReviewId();
 			reviewAuthor = mangaReview.getReviewAuthor();
 			reviewRating = mangaReview.getReviewRating();
 			reviewContent = mangaReview.getReviewContent();
+			if (mangaReview.getManga() != null) {
+				mangaId = mangaReview.getManga().getMangaId();
+			} else {
+				mangaId = null;
+			}
 		}
 	}
-
-	}
+}

@@ -28,7 +28,7 @@ public class Manga {
 	private String mangaPublishYear;
 	private String mangaLanguage;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "mangaka_id", nullable = false) // Foreign key
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude

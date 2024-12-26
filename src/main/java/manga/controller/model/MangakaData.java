@@ -9,7 +9,7 @@ import manga.entity.Mangaka;
 
 @Data
 @NoArgsConstructor
-public class MangaMangaka {
+public class MangakaData {
 		private Long mangakaId;
 		private String mangakaFirstName;
 		private String mangakaLastName;
@@ -17,17 +17,16 @@ public class MangaMangaka {
 		private String mangakaCountry;
 		private Set<Manga> mangas = new HashSet<>();
 		
-		public MangaMangaka (Mangaka mangaka) {
+		public MangakaData (Mangaka mangaka) {
 			mangakaId = mangaka.getMangakaId();
 			mangakaFirstName = mangaka.getMangakaFirstName();
 			mangakaLastName = mangaka.getMangakaLastName();
 			mangakaDob = mangaka.getMangakaDob();
-			mangakaId = mangaka.getMangakaId();
+			mangakaCountry = mangaka.getMangakaCountry();
 			
 			for (Manga manga : mangaka.getMangas()) {
 				mangas.add(manga);
 		}	
-		}
-		
+	}	
 }
 
