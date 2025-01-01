@@ -60,18 +60,13 @@ public class MangaData {
 		private String reviewAuthor;
 		private String reviewRating;
 		private String reviewContent;
-		private Long mangaId;
 		
 		public MangaReviewData(MangaReview mangaReview) {
 			mangaReviewId = mangaReview.getMangaReviewId();
 			reviewAuthor = mangaReview.getReviewAuthor();
 			reviewRating = mangaReview.getReviewRating();
 			reviewContent = mangaReview.getReviewContent();
-			if (mangaReview.getManga() != null) {
-				mangaId = mangaReview.getManga().getMangaId();
-			} else {
-				mangaId = null;
-			}
+			
 		}
 	}
 }

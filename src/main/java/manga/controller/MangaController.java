@@ -66,7 +66,7 @@ public class MangaController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public MangaReviewData addReviewToManga(@PathVariable Long mangaId, @RequestBody MangaReviewData mangaReviewData) {
 		log.info("Adding Review {} to manga with ID={}", mangaReviewData, mangaId);
-		return mangaService.saveMangaReview(mangaReviewData);
+		return mangaService.saveMangaReview(mangaId, mangaReviewData);
 	}
 	
 	@GetMapping("/mangareview")
@@ -75,12 +75,12 @@ public class MangaController {
 		return mangaService.retrieveAllMangaReviews();
 	}
 	
-	@PutMapping("/mangareview/{mangaReviewId}")
-	public MangaReviewData updateMangaReview(@PathVariable Long mangaReviewId,
+	@PutMapping("/{mangaId}/mangareview/{mangaReviewId}")
+	public MangaReviewData updateMangaReview(@PathVariable Long mangaReviewId, @PathVariable Long mangaId,
 			@RequestBody MangaReviewData mangaReviewData) {
 		mangaReviewData.setMangaReviewId(mangaReviewId);
 		log.info("Updating manga review {}", mangaReviewData);
-		return mangaService.saveMangaReview(mangaReviewData);
+		return mangaService.saveMangaReview(mangaId, mangaReviewData);
 	}
 	
 	@DeleteMapping("/mangareview/{mangaReviewId}")
@@ -104,8 +104,9 @@ public class MangaController {
 	}
 	
 	@PostMapping("/{mangaId}/genre/{genreId}")
-	public MangaData addGenreToManga(@PathVariable Long mangaId, @PathVariable Long genreId) {
-		return mangaService.addGenreToManga(mangaId, genreId);
+	public Map<String, String> addGenreToManga(@PathVariable Long mangaId, @PathVariable Long genreId) {
+		mangaService.addGenreToManga(mangaId, genreId);
+		return Map.of("message", "Adding genreId " + genreId + " to mangaId " + mangaId);
 	}
 	
 	@GetMapping("/{mangaId}/genres")

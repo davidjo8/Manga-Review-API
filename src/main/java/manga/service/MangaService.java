@@ -136,15 +136,15 @@ public List<MangakaData> retrieveAllMangakas() {
 }
 
 @Transactional(readOnly = false)
-public MangaReviewData saveMangaReview(MangaReviewData mangaReviewData) {
+public MangaReviewData saveMangaReview(Long mangaId, MangaReviewData mangaReviewData) {
     Long mangaReviewId = mangaReviewData.getMangaReviewId();
     MangaReview mangaReview = findOrCreateMangaReview(mangaReviewId);
 
     copyMangaReviewFields(mangaReview, mangaReviewData);
-    if (mangaReviewData.getMangaId() != null) {
-        Manga manga = mangaDao.findById(mangaReviewData.getMangaId())
+    if (mangaId != null) {
+        Manga manga = mangaDao.findById(mangaId)
                 .orElseThrow(() -> new NoSuchElementException(
-                		"Manga with ID=" + mangaReviewData.getMangaId() + " was not found."));
+                		"Manga with ID=" + mangaId + " was not found."));
 
         mangaReview.setManga(manga);
         manga.getMangaReviews().add(mangaReview);
@@ -160,12 +160,8 @@ private void copyMangaReviewFields(MangaReview mangaReview, MangaReviewData mang
 	mangaReview.setReviewAuthor(mangaReviewData.getReviewAuthor());
 	mangaReview.setReviewContent(mangaReviewData.getReviewContent());
 	mangaReview.setReviewRating(mangaReviewData.getReviewRating());
-	if (mangaReviewData.getMangaId() != null) {
-        Manga manga = mangaDao.findById(mangaReviewData.getMangaId())
-            .orElseThrow(() -> new NoSuchElementException("Manga with ID=" + mangaReviewData.getMangaId() + " was not found."));
-        mangaReview.setManga(manga);
     }
-}
+
 
 private MangaReview findOrCreateMangaReview(Long mangaReviewId) {
 	if(Objects.isNull(mangaReviewId)) {
@@ -177,7 +173,7 @@ private MangaReview findOrCreateMangaReview(Long mangaReviewId) {
 private MangaReview findMangaReviewById(Long mangaReviewId) {
 	return mangaReviewDao.findById(mangaReviewId)
 			.orElseThrow(() -> new NoSuchElementException(
-			"Mangaka with ID=" + mangaReviewId + " was not found."));
+			"Manga Review with ID=" + mangaReviewId + " was not found."));
 }
 
 public List<MangaReviewData> retrieveAllMangaReviews() {
@@ -236,7 +232,7 @@ public void deleteMangaReviewById(Long mangaReviewId) {
 	
 }
 
-public MangaData addGenreToManga(Long mangaId, Long genreId) {
+public void addGenreToManga(Long mangaId, Long genreId) {
 	Manga manga = mangaDao.findById(mangaId)
 			.orElseThrow(() -> new NoSuchElementException(
 					"Manga with ID=" + mangaId + " was not found."));
@@ -244,9 +240,12 @@ public MangaData addGenreToManga(Long mangaId, Long genreId) {
 			.orElseThrow(() -> new NoSuchElementException(
 					"Manga with ID=" + genreId + " was not found."));;
 	
+	//Populating the manga_genre join table with manga				
+	genre.getMangas().add(manga);
+	//Populating the manga_genre join table with genre				
 	manga.getGenres().add(genre);
-	Manga dbmanga = mangaDao.save(manga);
-	return new MangaData(dbmanga);
+//	Manga dbmanga = mangaDao.save(manga);
+//	return new MangaData(dbmanga);
 	
 }
 
