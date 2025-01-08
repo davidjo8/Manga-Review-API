@@ -4,63 +4,63 @@ The Manga Review API is a RESTful web application designed to manage and share r
 
 
 
-Features
+# Features
 
-1. Manga Management
+1. **Manga Management**
 
-Create, read, update, and delete manga entries.
+- Create, read, update, and delete manga entries.
 
-Associate manga with multiple genres.
+- Associate manga with multiple genres.
 
-Link manga to their respective mangakas.
+- Link manga to their respective mangakas.
 
-2. Genre Management
+2. **Genre Management**
 
-Manage a collection of genres.
+- Manage a collection of genres.
 
-Support for many-to-many relationships with manga.
+- Support for many-to-many relationships with manga.
 
-3. Mangaka Management
+3. **Mangaka Management**
 
-Manage mangaka details including their country of origin.
+- Manage mangaka details including their country of origin.
 
-Establish a many-to-one relationship with manga.
+- Establish a many-to-one relationship with manga.
 
-4. Manga Reviews
+4. **Manga Reviews**
 
-Submit, view, and manage reviews for specific manga.
+- Submit, view, and manage reviews for specific manga.
 
-Support for one-to-many relationships between manga and reviews.
-
-
-
-Technologies Used
-
-Programming Language: Java
-
-Framework: Spring Boot
-
-Database: MySQL
-
-Logging: SLF4J with Logback
+- Support for one-to-many relationships between manga and reviews.
 
 
 
-Setup Instructions
+# Technologies Used
 
-Prerequisites
+- Programming Language: Java
 
-JDK 17 or higher
+- Framework: Spring Boot
 
-Maven
+- Database: MySQL
 
-MySQL Server
-
-An IDE like IntelliJ, IDEA, or Eclipse
+- Logging: SLF4J with Logback
 
 
 
-Steps to Run the Application
+# Setup Instructions
+
+## Prerequisites
+
+- JDK 17 or higher
+
+- Maven
+
+- MySQL Server
+
+- An IDE like IntelliJ, IDEA, or Eclipse
+
+
+
+## Steps to Run the Application
 
 1. Clone the repository:
 
@@ -69,14 +69,14 @@ cd manga-review-api
 
 2. Configure the database:
 
-Create a new MySQL database named manga_review.
+- Create a new MySQL database named manga_review.
 
-Update the application.properties file with your MySQL credentials:
+- Update the application.properties file with your MySQL credentials:
 
-spring.datasource.url=jdbc:mysql://localhost:3306/manga_review
-spring.datasource.username=<your_username>
-spring.datasource.password=<your_password>
-spring.jpa.hibernate.ddl-auto=update
+	spring.datasource.url=jdbc:mysql://localhost:3306/manga_review
+	spring.datasource.username=<your_username>
+	spring.datasource.password=<your_password>
+	spring.jpa.hibernate.ddl-auto=update
 
 3. Build and run the application:
 
@@ -89,53 +89,51 @@ The API will run locally at http://localhost:8080.
 
 
 
-API Endpoints
+# API Endpoints
 
 Request mapping: /manga
 
-Manga Endpoints
+## Manga Endpoints
 
-GET: Retrieve all manga entries.
+- GET: Retrieve all manga entries.
 
-GET /{mangaId}: Retrieve a specific manga by ID.
+- GET /{mangaId}: Retrieve a specific manga by ID.
 
-POST: Add a new manga.
+- POST: Add a new manga.
 
+## Genre Endpoints
 
-Genre Endpoints
+- GET /genre: Retrieve all genres.
 
-GET /genre: Retrieve all genres.
+- POST /genre: Add a new genre.
 
-POST /genre: Add a new genre.
+## Mangaka Endpoints
 
+- GET /mangaka: Retrieve all mangakas.
 
-Mangaka Endpoints
-
-GET /mangaka: Retrieve all mangakas.
-
-POST /mangaka: Add a new mangaka.
+- POST /mangaka: Add a new mangaka.
 
 
-Manga Review Endpoints
+## Manga Review Endpoints
 
-GET /mangareview: Retrieve reviews for a specific manga.
+- GET /mangareview: Retrieve reviews for a specific manga.
 
-POST /{mangaId}/mangareview: Add a review for a manga.
+- POST /{mangaId}/mangareview: Add a review for a manga.
 
-PUT /{mangaId}/mangareview/{mangaReviewId}: Update a manga entry.
+- PUT /{mangaId}/mangareview/{mangaReviewId}: Update a manga entry.
 
-DELETE /mangareview/{mangaReviewId}: Delete a manga entry.
+- DELETE /mangareview/{mangaReviewId}: Delete a manga entry.
 
-Manga_Genre Join Table Endpoints
+## Manga_Genre Join Table Endpoints
 
-GET /{mangaId}/genres Get all the genres within a manga entry.
+- GET /{mangaId}/genres Get all the genres within a manga entry.
 
-POST /{mangaId}/genre/{genreId} Add a genre to a manga.
+- POST /{mangaId}/genre/{genreId} Add a genre to a manga.
 
 
-Database Schema
+# Database Schema
 
-Tables
+## Tables
 
 1. Manga: Stores manga details such as title, description, and mangaka reference.
 
@@ -146,30 +144,30 @@ Tables
 4. MangaReview: Stores user reviews for manga.
 
 
-Relationships
+## Relationships
 
-Manga and Genre: Many-to-Many
+- Manga and Genre: Many-to-Many
 
-Manga and Mangaka: Many-to-One
+- Manga and Mangaka: Many-to-One
 
-Manga and MangaReview: One-to-Many
-
-
-Future Enhancements
-
-Implement user authentication and authorization.
-
-Add rating functionality for manga.
-
-Integrate external APIs for manga metadata.
-
-Develop a front-end interface.
+- Manga and MangaReview: One-to-Many
 
 
-License
+# Future Enhancements
+
+- Implement user authentication and authorization.
+
+- Add rating functionality for manga.
+
+- Integrate external APIs for manga metadata.
+
+- Develop a front-end interface.
+
+
+# License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Contact
+# Contact
 
 For questions or contributions, please contact David Canarsky at davidjosephgpa@gmail.com.
