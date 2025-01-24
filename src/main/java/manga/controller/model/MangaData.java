@@ -9,6 +9,12 @@ import manga.entity.Genre;
 import manga.entity.Manga;
 import manga.entity.MangaReview;
 
+
+/* This is a DTO. It's an intermediary between the API's internal logic and external clients, 
+ like if I make a front end application. All of this code could be in the MangaController but
+ for the sake of making the controller class and package cleaner and not handle a lot of different logic
+ this data is all here.
+*/ 
 @Data
 @NoArgsConstructor
 public class MangaData {

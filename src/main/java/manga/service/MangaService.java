@@ -24,6 +24,9 @@ import manga.entity.Manga;
 import manga.entity.MangaReview;
 import manga.entity.Mangaka;
 
+
+// This is the service layer, an intermediate layer between the controller and Data layer. 
+// Basically all of the code in here is for saving into the Data layer and defines how the application operates.
 @Service
 public class MangaService {
 
@@ -36,6 +39,8 @@ public class MangaService {
 	@Autowired
 	private GenreDao genreDao;
 	
+	
+	//save the Manga table data into the Data layer.
 	@Transactional(readOnly = false)
 	public MangaData saveManga(MangaData mangaData) {
 		Long mangaId = mangaData.getMangaId();
@@ -43,7 +48,8 @@ public class MangaService {
 		copyMangaFields(manga, mangaData);
 		return new MangaData(mangaDao.save(manga));
 	}
-
+	
+	//finds a Manga ID or if it's not there creates one.
 	private Manga findOrAddManga(Long mangaId) {
 		if(Objects.isNull(mangaId)) {
 			return new Manga();
@@ -51,13 +57,13 @@ public class MangaService {
 			return findMangaById(mangaId);
 		}
 	}
-
+	//just finds a manga by Id.
 	private Manga findMangaById(Long mangaId) {
 		return mangaDao.findById(mangaId)
 				.orElseThrow(() -> new NoSuchElementException(
 						"Manga with ID=" + mangaId + " was not found."));
 	}
-
+	
 private void copyMangaFields(Manga manga, MangaData mangaData) {
 	manga.setMangaCountry(mangaData.getMangaCountry());
 	manga.setMangaId(mangaData.getMangaId());

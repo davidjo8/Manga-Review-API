@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 import manga.entity.Manga;
 import manga.entity.Mangaka;
 
+
+/* This is the same as the MangaData class but this is specifically a DTO for the Mangaka data.
+ * I could have made this same kind of DTO for Genre and the MangaReview classes but it was easier
+ * to have them in a DTO with the Manga class.
+ */
 @Data
 @NoArgsConstructor
 public class MangakaData {

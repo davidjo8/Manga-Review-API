@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+//This is the mangaka entity table, where its relationship to the other tables is defined.
 @Entity
 @Data
 public class Mangaka {

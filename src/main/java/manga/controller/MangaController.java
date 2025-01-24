@@ -23,6 +23,13 @@ import manga.controller.model.MangaData.MangaReviewData;
 import manga.controller.model.MangakaData;
 import manga.service.MangaService;
 
+/* This is the Controller. It shows all of the commands that we need to put in to the API in order to do CRUD
+ * operations for this Manga Review API. I didn't make all of the CRUD operations available for all of the classes.
+ * That's something I could work on, on improving in the future for this API.
+ * For now all of the tables have Create and Read operations possible and the MangaReview table has all four,
+ *  Create, Read, Update and Delete that are possible.
+ */
+
 @RestController
 @RequestMapping("/manga")
 @Slf4j
